@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME=mimeparse
+
+export PYBUILD_TEST_PYTEST := 1
+export PYBUILD_BEFORE_TEST=cp mimeparse_test.py testdata.json {build_dir}
+export PYBUILD_AFTER_TEST=rm -rf {build_dir}/mimeparse_test.py {build_dir}/testdata.json
+
+%:
+	dh $@ --buildsystem=pybuild --with python3
